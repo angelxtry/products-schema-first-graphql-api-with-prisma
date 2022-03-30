@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "CommonJS",
+    "allowJs": true,
+    "checkJs": true,
+    "declaration": true,
+    "rootDir": "./",
+    "outDir": "ts-build",
+    "baseUrl": ".",
+    "removeComments": true,
+    "incremental": true,
+    "diagnostics": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "listEmittedFiles": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "paths": {
+      "@/*": ["src/*"],
+      "@config/*": ["config/*"]
+    },
+  },
+  "include": ["src/**/*", "config/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.js"]
+}
