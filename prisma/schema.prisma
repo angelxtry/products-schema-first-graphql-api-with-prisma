@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ProductGroup {
+  id                  Int                  @id     @default(autoincrement())
+  productGroupName    String
+  companyName         String
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  productOptionGroups ProductOptionGroup[]
+}
+
+model ProductOptionGroup {
+  id                      Int           @id     @default(autoincrement())
+  productOptionGroupName  String
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+  productGroup            ProductGroup  @relation(fields: [productGroupId], references: [id])
+  productGroupId          Int
+  productOptions          ProductOption[]
+}
+
+model ProductOption {
+  id                    Int           @id     @default(autoincrement())
+  productOptionName     String
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  productOptionGroup    ProductOptionGroup  @relation(fields: [productOptionGroupId], references: [id])
+  productOptionGroupId  Int
+}
