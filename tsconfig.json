@@ -17,6 +17,7 @@
     "listEmittedFiles": true,
     "moduleResolution": "node",
     "sourceMap": true,
+    "experimentalDecorators": true,
 
     "strict": true,
     "noImplicitAny": true,

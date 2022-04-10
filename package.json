@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "codegen": "graphql-codegen --config codegen.yml",
     "dev": "NODE_ENV=development ts-node-dev --transpile-only --respawn -r tsconfig-paths/register --watch ./src/**/*.pug,./src/**/*.graphql --trace-warnings --trace-uncaught -- ./src/index.ts",
     "start": "NODE_ENV=production ts-node --transpile-only -r tsconfig-paths/register src/index.js",
     "watch": "tsc --watch"
@@ -11,10 +12,17 @@
   "dependencies": {
     "@prisma/client": "3.11.1",
     "apollo-server": "^3.6.7",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
     "graphql": "^16.3.0",
     "prisma": "^3.11.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/typescript": "^2.4.8",
+    "@graphql-codegen/typescript-resolvers": "^2.6.1",
+    "@graphql-tools/load-files": "^6.5.3",
+    "@graphql-tools/merge": "^8.2.6",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "eslint": "^8.12.0",

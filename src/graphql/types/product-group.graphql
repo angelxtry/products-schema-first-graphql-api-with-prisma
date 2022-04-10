@@ -1,0 +1,30 @@
+type ProductGroup implements Node {
+  id: ID!
+  productGroupName: String!
+  companyName: String!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type Query {
+  productGroups: [ProductGroup!]!
+}
+
+input CreateProductGroupInput {
+  productGroupName: String!
+  companyName: String!
+}
+
+type ProductGroupResultSuccess {
+  productGroup: ProductGroup!
+}
+
+type CreateProductGroupInvalidInputError implements ErrorType {
+  message: String!
+}
+
+union CreateProductGroupPayload = ProductGroupResultSuccess | CreateProductGroupInvalidInputError
+
+type Mutation {
+  createProductGroup(input: CreateProductGroupInput!): CreateProductGroupPayload!
+}

@@ -1,0 +1,9 @@
+scalar Date
+
+interface Node {
+  id: ID!
+}
+
+interface ErrorType {
+  message: String!
+}
