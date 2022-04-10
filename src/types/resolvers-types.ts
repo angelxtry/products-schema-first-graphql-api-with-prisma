@@ -64,11 +64,6 @@ export type Query = {
   productGroups: Array<ProductGroup>;
 };
 
-export type ServerError = ErrorType & {
-  __typename?: 'ServerError';
-  message: Scalars['String'];
-};
-
 export type WithIndex<TObject> = TObject & Record<string, any>;
 export type ResolversObject<TObject> = WithIndex<TObject>;
 
@@ -144,14 +139,13 @@ export type ResolversTypes = ResolversObject<{
   CreateProductGroupInvalidInputError: ResolverTypeWrapper<CreateProductGroupInvalidInputError>;
   CreateProductGroupPayload: ResolversTypes['CreateProductGroupInvalidInputError'] | ResolversTypes['ProductGroupResultSuccess'];
   Date: ResolverTypeWrapper<Scalars['Date']>;
-  ErrorType: ResolversTypes['CreateProductGroupInvalidInputError'] | ResolversTypes['ServerError'];
+  ErrorType: ResolversTypes['CreateProductGroupInvalidInputError'];
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Mutation: ResolverTypeWrapper<{}>;
   Node: ResolversTypes['ProductGroup'];
   ProductGroup: ResolverTypeWrapper<ProductGroup>;
   ProductGroupResultSuccess: ResolverTypeWrapper<ProductGroupResultSuccess>;
   Query: ResolverTypeWrapper<{}>;
-  ServerError: ResolverTypeWrapper<ServerError>;
   String: ResolverTypeWrapper<Scalars['String']>;
 }>;
 
@@ -162,14 +156,13 @@ export type ResolversParentTypes = ResolversObject<{
   CreateProductGroupInvalidInputError: CreateProductGroupInvalidInputError;
   CreateProductGroupPayload: ResolversParentTypes['CreateProductGroupInvalidInputError'] | ResolversParentTypes['ProductGroupResultSuccess'];
   Date: Scalars['Date'];
-  ErrorType: ResolversParentTypes['CreateProductGroupInvalidInputError'] | ResolversParentTypes['ServerError'];
+  ErrorType: ResolversParentTypes['CreateProductGroupInvalidInputError'];
   ID: Scalars['ID'];
   Mutation: {};
   Node: ResolversParentTypes['ProductGroup'];
   ProductGroup: ProductGroup;
   ProductGroupResultSuccess: ProductGroupResultSuccess;
   Query: {};
-  ServerError: ServerError;
   String: Scalars['String'];
 }>;
 
@@ -187,7 +180,7 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type ErrorTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ErrorType'] = ResolversParentTypes['ErrorType']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'CreateProductGroupInvalidInputError' | 'ServerError', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'CreateProductGroupInvalidInputError', ParentType, ContextType>;
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 }>;
 
@@ -218,11 +211,6 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   productGroups?: Resolver<Array<ResolversTypes['ProductGroup']>, ParentType, ContextType>;
 }>;
 
-export type ServerErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServerError'] = ResolversParentTypes['ServerError']> = ResolversObject<{
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type Resolvers<ContextType = any> = ResolversObject<{
   CreateProductGroupInvalidInputError?: CreateProductGroupInvalidInputErrorResolvers<ContextType>;
   CreateProductGroupPayload?: CreateProductGroupPayloadResolvers<ContextType>;
@@ -233,6 +221,5 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   ProductGroup?: ProductGroupResolvers<ContextType>;
   ProductGroupResultSuccess?: ProductGroupResultSuccessResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  ServerError?: ServerErrorResolvers<ContextType>;
 }>;
 
