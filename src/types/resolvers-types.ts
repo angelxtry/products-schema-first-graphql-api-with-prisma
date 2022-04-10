@@ -61,7 +61,13 @@ export type ProductGroupResultSuccess = {
 
 export type Query = {
   __typename?: 'Query';
+  productGroup?: Maybe<ProductGroup>;
   productGroups: Array<ProductGroup>;
+};
+
+
+export type QueryProductGroupArgs = {
+  productGroupId: Scalars['ID'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -208,6 +214,7 @@ export type ProductGroupResultSuccessResolvers<ContextType = any, ParentType ext
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  productGroup?: Resolver<Maybe<ResolversTypes['ProductGroup']>, ParentType, ContextType, RequireFields<QueryProductGroupArgs, 'productGroupId'>>;
   productGroups?: Resolver<Array<ResolversTypes['ProductGroup']>, ParentType, ContextType>;
 }>;
 

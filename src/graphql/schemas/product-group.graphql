@@ -8,6 +8,7 @@ type ProductGroup implements Node {
 
 type Query {
   productGroups: [ProductGroup!]!
+  productGroup(productGroupId: ID!): ProductGroup
 }
 
 input CreateProductGroupInput {

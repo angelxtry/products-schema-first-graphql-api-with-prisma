@@ -8,16 +8,35 @@ import { Context } from '@/index';
 import {
   CreateProductGroupPayload,
   MutationCreateProductGroupArgs,
+  QueryProductGroupArgs,
 } from '@/types/resolvers-types';
 
 export const productGroupResolver = {
   Query: {
-    productGroups: (
+    productGroups: async (
       _: never,
       __: never,
       { prisma }: Context,
     ): Promise<ProductGroup[]> => {
-      return prisma.productGroup.findMany();
+      try {
+        return await prisma.productGroup.findMany();
+      } catch (error) {
+        throw new ApolloError('Server Error');
+      }
+    },
+
+    productGroup: (
+      _: never,
+      { productGroupId }: QueryProductGroupArgs,
+      { prisma }: Context,
+    ): Promise<ProductGroup | null> => {
+      try {
+        return prisma.productGroup.findUnique({
+          where: { id: Number(productGroupId) },
+        });
+      } catch (error) {
+        throw new ApolloError('Server Error');
+      }
     },
   },
 
