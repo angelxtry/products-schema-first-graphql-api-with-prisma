@@ -25,13 +25,13 @@ export const productGroupResolver = {
       }
     },
 
-    productGroup: (
+    productGroup: async (
       _: never,
       { productGroupId }: QueryProductGroupArgs,
       { prisma }: Context,
     ): Promise<ProductGroup | null> => {
       try {
-        return prisma.productGroup.findUnique({
+        return await prisma.productGroup.findUnique({
           where: { id: Number(productGroupId) },
         });
       } catch (error) {
