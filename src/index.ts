@@ -7,7 +7,7 @@ export interface Context {
   prisma: PrismaClient<
     Prisma.PrismaClientOptions,
     never,
-    Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
+    Prisma.RejectOnNotFound | Prisma.RejectPerOperation
   >;
 }
 
