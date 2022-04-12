@@ -8,18 +8,35 @@ import { Context } from '@/index';
 import {
   CreateProductGroupPayload,
   MutationCreateProductGroupArgs,
+  ProductGroupConnection,
   QueryProductGroupArgs,
+  QueryProductGroupsArgs,
 } from '@/types/resolvers-types';
 
 export const productGroupResolver = {
   Query: {
     productGroups: async (
       _: never,
-      __: never,
+      { pagination: { limit, page } }: QueryProductGroupsArgs,
       { prisma }: Context,
-    ): Promise<ProductGroup[]> => {
+    ): Promise<ProductGroupConnection> => {
       try {
-        return await prisma.productGroup.findMany();
+        const pagination = { skip: (page - 1) * limit, take: limit };
+        const totalCount = await prisma.productGroup.count();
+        const productGroups = await prisma.productGroup.findMany({
+          skip: pagination.skip,
+          take: pagination.take,
+        });
+        const edges = productGroups.map((productGroup) => ({
+          node: {
+            ...productGroup,
+            id: productGroup.id.toString(),
+          },
+        }));
+        return {
+          totalCount,
+          edges,
+        };
       } catch (error) {
         throw new ApolloError('Server Error');
       }

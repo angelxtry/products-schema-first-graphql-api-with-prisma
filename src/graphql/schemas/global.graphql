@@ -7,3 +7,8 @@ interface Node {
 interface ErrorType {
   message: String!
 }
+
+input PaginationInput {
+  limit: Int!
+  page: Int!
+}

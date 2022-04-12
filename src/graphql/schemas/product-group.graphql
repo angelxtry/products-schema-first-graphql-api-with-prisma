@@ -6,8 +6,17 @@ type ProductGroup implements Node {
   updatedAt: Date!
 }
 
+type ProductGroupEdge {
+  node: ProductGroup!
+}
+
+type ProductGroupConnection {
+  totalCount: Int!
+  edges: [ProductGroupEdge!]!
+}
+
 type Query {
-  productGroups: [ProductGroup!]!
+  productGroups(pagination: PaginationInput!): ProductGroupConnection!
   productGroup(productGroupId: ID!): ProductGroup
 }
 
