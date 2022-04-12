@@ -4,6 +4,7 @@ generates:
     config:
       useIndexSignature: true
       scalars:
+        ID: number
         Date: Date
     plugins:
       - typescript

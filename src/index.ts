@@ -11,6 +11,11 @@ export interface Context {
   >;
 }
 
+// const prisma = new PrismaClient({ log: [{ level: 'query', emit: 'event' }] });
+// prisma.$on('query', (e) => {
+//   console.log(e);
+// });
+
 const prisma = new PrismaClient();
 
 const server = new ApolloServer({

@@ -9,6 +9,7 @@ import {
   CreateProductGroupPayload,
   MutationCreateProductGroupArgs,
   ProductGroupConnection,
+  ProductOptionGroup,
   QueryProductGroupArgs,
   QueryProductGroupsArgs,
 } from '@/types/resolvers-types';
@@ -30,7 +31,7 @@ export const productGroupResolver = {
         const edges = productGroups.map((productGroup) => ({
           node: {
             ...productGroup,
-            id: productGroup.id.toString(),
+            productOptionGroups: [],
           },
         }));
         return {
@@ -49,7 +50,7 @@ export const productGroupResolver = {
     ): Promise<ProductGroup | null> => {
       try {
         return await prisma.productGroup.findUnique({
-          where: { id: Number(productGroupId) },
+          where: { id: productGroupId },
         });
       } catch (error) {
         throw new ApolloError('Server Error');
@@ -84,9 +85,29 @@ export const productGroupResolver = {
           __typename: 'ProductGroupResultSuccess',
           productGroup: {
             ...productGroup,
-            id: productGroup.id.toString(),
+            productOptionGroups: [],
           },
         };
+      } catch (error) {
+        throw new ApolloError('Server Error');
+      }
+    },
+  },
+
+  ProductGroup: {
+    productOptionGroups: async (
+      { id: productGroupId }: ProductGroup,
+      __: never,
+      { prisma }: Context,
+    ): Promise<ProductOptionGroup[]> => {
+      try {
+        const productOptionGroups = await prisma.productOptionGroup.findMany({
+          where: { productGroupId },
+        });
+        return productOptionGroups.map((productOptionGroup) => ({
+          ...productOptionGroup,
+          productOptions: [],
+        }));
       } catch (error) {
         throw new ApolloError('Server Error');
       }

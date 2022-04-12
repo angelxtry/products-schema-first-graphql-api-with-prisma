@@ -4,6 +4,7 @@ type ProductGroup implements Node {
   companyName: String!
   createdAt: Date!
   updatedAt: Date!
+  productOptionGroups: [ProductOptionGroup!]!
 }
 
 type ProductGroupEdge {

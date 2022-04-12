@@ -1,0 +1,6 @@
+type ProductOption implements Node {
+  id: ID!
+  productOptionName: String!
+  createdAt: Date!
+  updatedAt: Date!
+}
