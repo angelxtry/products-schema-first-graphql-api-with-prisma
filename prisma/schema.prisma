@@ -36,4 +36,24 @@ model ProductOption {
   updatedAt             DateTime      @updatedAt
   productOptionGroup    ProductOptionGroup  @relation(fields: [productOptionGroupId], references: [id])
   productOptionGroupId  Int
+  products              ProductOptionRel[]
+}
+
+model Product {
+  id                    Int           @id     @default(autoincrement())
+  productName           String
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  productOptions        ProductOptionRel[]
+}
+
+model ProductOptionRel {
+  product               Product       @relation(fields: [productId], references: [id])
+  productId             Int
+  productOption         ProductOption @relation(fields: [productOptionId], references: [id])
+  productOptionId       Int
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  @@id([productId, productOptionId])
 }
